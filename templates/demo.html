@@ -16,6 +16,8 @@
   <script type="text/javascript" src="{{ url_for('static',filename='js/jquery.onepage-scroll.js') }}"></script>
   <link href='/static/css/onepage-scroll.css' rel='stylesheet' type='text/css'>
   <script src="{{ url_for('static',filename='js/vue.js') }}"></script>
+  <link rel="stylesheet" href="/static/css/bootstrap.css">
+  <script src="/static/js/bootstrap.js"></script>
   <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <script type=text/javascript>
     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
@@ -462,8 +464,11 @@
 	      <div class="page_container">
           <h1>Ready-to-use plugin</h1>
           <h2>All you need is an HTML markup, call the script and BAM!</h2>
-          <form id="form1" onsubmit="return false"enctype="multipart/form-data">
-            <input type=file id="img_id" name="img">
+          <form id="form1" onsubmit="return false" enctype="multipart/form-data">
+            <span class="btn btn-success fileinput-button">
+              <span>上传</span>
+              <input type="file" id="img_id" name="img">
+            </span>
             topk:<select name="topk">
                 <option value="1">1</option>
                 <option value="2">2</option>
