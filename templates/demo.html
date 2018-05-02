@@ -2,22 +2,19 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>jQuery One Page Scroll by Pete R. | The Pete Design</title>
-	<meta name="title" content="jQuery One Page Scroll by Pete R. | The Pete Design" />
-	<meta name="description" content="Create an Apple-like one page scroller website (iPhone 5S website) with One Page Scroll plugin" />
+	<title>CheXNet | Created by Davy</title>
+	<meta name="title" content="CheXNet | Created by Davy" />
+	<meta name="description" content="Website for CheXNet as a course project for Media and Cognition in Dept. of EE THU" />
 	<link rel="image_src" href="/images/notify_better_image.png" />
 
-	<meta content="http://www.thepetedesign.com/demos/onepage_scroll_demo.html" property="og:url" />
-	<meta content="http://www.thepetedesign.com/images/onepage_scroll_image.png" property="og:image" />
 	<link rel="shortcut icon" id="favicon" href="favicon.png"> 
-	<meta name="author" content="Pete R.">
-	<link rel="canonical" href="http://www.thepetedesign.com/demos/onepage_scroll_demo.html" />
+	<meta name="author" content="Davy">
+	<link rel="canonical" href="http://www.chexnet.com/index.html" />
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Pacifico:400' rel='stylesheet' type='text/css'>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  <script type="text/javascript" src="jquery.onepage-scroll.js"></script>
-  <script src="{{ url_for('static',filename='jquery.onepage-scroll.js') }}"></script>
-  <link href='/static/onepage-scroll.css' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="{{ url_for('static',filename='js/jquery.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static',filename='js/jquery.onepage-scroll.js') }}"></script>
+  <link href='/static/css/onepage-scroll.css' rel='stylesheet' type='text/css'>
   <script src="{{ url_for('static',filename='js/vue.js') }}"></script>
   <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <script type=text/javascript>
@@ -298,7 +295,7 @@
       text-align: center;
     }
     .main section.page2 {
-      background: #555557 url(back-phone.png) no-repeat center -150px ;
+      background: #555557 url(/static/img/back-phone.png) no-repeat center -150px ;
     }
     .main section.page2 > img {
       position: absolute;
@@ -328,15 +325,15 @@
       background: rgba(0, 0, 0, 0.25);
       color: #FFF;
       }
-    .main section.page3 {
+    .main section.page4 {
       background:url(tilted-phone.png) no-repeat 156px -150px ;
     }
-    .main section.page3 .page_container {
+    .main section.page4 .page_container {
       overflow: hidden;
       width: 500px;
       right: -285px;
     }
-    .main section.page3 h1 {
+    .main section.page4 h1 {
       text-align: left;
       padding: 0;
       margin-bottom: 0;
@@ -344,7 +341,7 @@
       letter-spacing: -1px;
       color: black;
     }
-    .main section.page3 h2 {
+    .main section.page4 h2 {
       color: rgba(0,0,0,0.85);
       text-align: left;
       line-height: 160%;
@@ -357,7 +354,7 @@
       height: auto;
     }
     
-    body.disabled-onepage-scroll .main section .page_container, body.disabled-onepage-scroll .main section.page3 .page_container  {
+    body.disabled-onepage-scroll .main section .page_container, body.disabled-onepage-scroll .main section.page4 .page_container  {
       padding: 20px;
       margin-top: 150px;
       -webkit-box-sizing: border-box;
@@ -392,7 +389,7 @@
       overflow: hidden;
     }
     
-    body.disabled-onepage-scroll .main section.page3 .page_container {
+    body.disabled-onepage-scroll .main section.page4 .page_container {
       width: 90%;
       margin-left: auto;
       margin-right: auto;
@@ -418,12 +415,12 @@
         <div class="page_container">
           <h1>CheXNet</h1>
           <h2>Radiologist-Level Pneumonia Detection on Chest X-Rays with Deep Learning</h2>
-          <p class="credit">Created by <a href="http://www.thepetedesign.com">Pete R.</a>, Founder of <a href="http://www.bucketlistly.com" target="_blank">BucketListly</a></p>
+          <p class="credit">Created by <a href="https://github.com/DavyMorgan">Davy Morgan</a></p>
           <div class="btns">
   	        <a class="reload btn" href="https://github.com/peachananr/onepage-scroll">Download on Github</a>
   	      </div>
   	    </div>
-  	    <img src="phones.png" alt="phones">
+  	    <img src="/static/img/phones.png" alt="phones">
       </section>
 	    
 	    <section class="page2">
@@ -443,8 +440,44 @@
 	        </code>
 	      </div>
       </section>
+
+      <section class="page3">
+	      <div class="page_container">
+          <h1>Ready-to-use plugin</h1>
+          <h2>All you need is an HTML markup, call the script and BAM!</h2>
+          <form id="form1" onsubmit="return false"enctype="multipart/form-data">
+            <input type=file id="img_id" name="img">
+            topk:<select name="topk">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="5">5</option>
+            </select>
+            <button type="button" onclick="ajaxForm()">识别</button>
+          </form>
+          <div id="app" v-show="change_status">
+            <img id="send_img" :src="img_path" />
+            <table id="generatedTable"  >
+                <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>标签</th>
+                        <th>概率</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr v-for="(item,index) in predictions">
+                        <td >[[ index ]]</td>
+                        <td >[[ item.label ]]</td>
+                        <td>[[ item.probability ]]</td>
+                    </tr>
+                 </tbody>
+             </table>
+          </div>
+	      </div>
+      </section>
 	    
-	    <section class="page3">
+	    <section class="page4">
 	      <div class="page_container">
           <h1>Pretty Neat Eh?</h1>
           <h2>You can customise the animation timing, the selector or even the animation easing using CSS3. I can't wait to see what you guys will come up with. Don't forget to grab them for free on Github'</h2>
@@ -461,26 +494,26 @@
             </select>
             <button type="button" onclick="ajaxForm()">识别</button>
           </form>
+          <div id="app" v-show="change_status">
+            <img id="send_img" :src="img_path" />
+            <table id="generatedTable"  >
+                <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>标签</th>
+                        <th>概率</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr v-for="(item,index) in predictions">
+                        <td >[[ index ]]</td>
+                        <td >[[ item.label ]]</td>
+                        <td>[[ item.probability ]]</td>
+                    </tr>
+                 </tbody>
+             </table>
+          </div>
         </div>
-        <div id="app" v-show="change_status">
-          <img id="send_img" :src="img_path" />
-          <table id="generatedTable"  >
-              <thead>
-                  <tr>
-                      <th>排名</th>
-                      <th>标签</th>
-                      <th>概率</th>
-                  </tr>
-              </thead>
-              <tbody >
-                  <tr v-for="(item,index) in predictions">
-                      <td >[[ index ]]</td>
-                      <td >[[ item.label ]]</td>
-                      <td>[[ item.probability ]]</td>
-                  </tr>
-               </tbody>
-           </table>
-      </div>
       <script>
           var result_1 = new Vue({
               el:"#app",
@@ -500,8 +533,8 @@
       </script>
       </section>
     </div>
-    <a class="back" href="http://www.thepetedesign.com/#design">Back to The Pete Design</a>
-    <a href="https://github.com/peachananr/onepage-scroll"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <a class="back" href="http://www.thepetedesign.com/#design">Highly appreciate Pete R.'s great work </a>
+    <a href="https://github.com/DavyMorgan/CheXNet"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
   </div>
 </body>
 </html>
