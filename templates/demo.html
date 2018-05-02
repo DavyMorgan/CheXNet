@@ -482,13 +482,13 @@
               <span>上传</span>
               <input type="file" id="img_id" name="img">
             </span>
-            topk:<select name="topk">
+            topk:<select name="topk" multiple='multiple'>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="5">5</option>
             </select>
-            <button type="button" onclick="ajaxForm()">识别</button>
+            <button class="btn btn-success fileinput-button" type="button" onclick="ajaxForm()">识别</button>
           </form>
           <div id="app" v-show="change_status">
             <img id="send_img" :src="img_path" />
