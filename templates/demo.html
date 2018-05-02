@@ -414,6 +414,19 @@
       margin-right: auto;
       right: 0;
     }
+    .fileinput-button {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+        }
+    .fileinput-button input{
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      opacity: 0;
+      -ms-filter: 'alpha(opacity=0)';
+      height: 55px;
+    }
 	</style>
 	<script>
 	  $(document).ready(function(){
