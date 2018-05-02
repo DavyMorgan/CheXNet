@@ -280,15 +280,17 @@ header {
 .viewing-page-2 .back{
     background: rgba(0, 0, 0, 0.25);
     color: #FFF;
-    }
-.main section.page3{
-    background:url(/static/img/tilted-phone.png) no-repeat 156px -150px ;
 }
+/*
+.main section.page3{
+    background:#e9ae55;
+}*/
 .main section.page3 .page_container{
     top: 5%;
 }
 .main section.page3 h1{
-    padding: 25px 50px;
+    color: black;
+    padding: 75px 50px 25px 50px;
 }
 #form1{
     position: relative;
@@ -302,11 +304,12 @@ header {
     position: relative;
     margin: 0 auto;
 }
+/*
 .main section.page4 {
-    background:url(/static/img/tilted-phone.png) no-repeat 156px -150px ;
-}
+    background:url(/static/img/auther.jpg) no-repeat 156px -150px ;
+}*/
 .main section.page4 .page_container {
-    overflow: hidden;
+    /*overflow: hidden;*/
     width: 500px;
     right: -285px;
 }
@@ -325,7 +328,10 @@ header {
     font-weight: 100;
     font-size: 21px;
 }
-
+.main section.page4 img{
+    position: absolute;
+    left: -80%;
+}
 body.disabled-onepage-scroll .onepage-wrapper  section {
     min-height: 100%;
     height: auto;
