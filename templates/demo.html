@@ -325,8 +325,25 @@
       background: rgba(0, 0, 0, 0.25);
       color: #FFF;
       }
+    .main section.page3{
+      background:url(/static/img/tilted-phone.png) no-repeat 156px -150px ;
+    }
+    .main section.page3 .page_container{
+      top: 5%;
+    }
+    .main section.page3 h1{
+      padding: 25px 50px;
+    }
+    #form1{
+      position: relative;
+      top: 10%;
+    }
+    #app{
+      position: relative;
+      top: 30%;
+    }
     .main section.page4 {
-      background:url(tilted-phone.png) no-repeat 156px -150px ;
+      background:url(/static/img/tilted-phone.png) no-repeat 156px -150px ;
     }
     .main section.page4 .page_container {
       overflow: hidden;
@@ -417,7 +434,7 @@
           <h2>Radiologist-Level Pneumonia Detection on Chest X-Rays with Deep Learning</h2>
           <p class="credit">Created by <a href="https://github.com/DavyMorgan">Davy Morgan</a></p>
           <div class="btns">
-  	        <a class="reload btn" href="https://github.com/peachananr/onepage-scroll">Download on Github</a>
+  	        <a class="reload btn" href="https://github.com/DavyMorgan/CheXNet">Download on Github</a>
   	      </div>
   	    </div>
   	    <img src="/static/img/phones.png" alt="phones">
@@ -483,35 +500,6 @@
           <h2>You can customise the animation timing, the selector or even the animation easing using CSS3. I can't wait to see what you guys will come up with. Don't forget to grab them for free on Github'</h2>
           <div class="btns">
   	        <a class="reload btn" href="https://github.com/peachananr/onepage-scroll">Download on Github</a>
-          </div>
-          <form id="form1" onsubmit="return false"enctype="multipart/form-data">
-            <input type=file id="img_id" name="img">
-            topk:<select name="topk">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="5">5</option>
-            </select>
-            <button type="button" onclick="ajaxForm()">识别</button>
-          </form>
-          <div id="app" v-show="change_status">
-            <img id="send_img" :src="img_path" />
-            <table id="generatedTable"  >
-                <thead>
-                    <tr>
-                        <th>排名</th>
-                        <th>标签</th>
-                        <th>概率</th>
-                    </tr>
-                </thead>
-                <tbody >
-                    <tr v-for="(item,index) in predictions">
-                        <td >[[ index ]]</td>
-                        <td >[[ item.label ]]</td>
-                        <td>[[ item.probability ]]</td>
-                    </tr>
-                 </tbody>
-             </table>
           </div>
         </div>
       <script>
