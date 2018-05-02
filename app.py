@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# @Time    : 2018/4/24 10:04
-# @Author  : zhoujun
+# @Time    : 2018/5/2 14:36
+# @Author  : Davy
 import flask
 from flask_uploads import UploadSet, IMAGES, configure_uploads, ALL
 from flask import request, Flask, redirect, url_for, render_template
