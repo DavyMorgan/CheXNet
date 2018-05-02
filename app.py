@@ -26,7 +26,8 @@ def index():
 def upload():
     if request.method == 'POST':
         img = request.files['img'].filename
-        topk = request.form['topk']
+        #topk = request.form['topk']
+        topk = 1
         img = secure_filename(img)
         new_name = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime()) + '_' + img
         filename = photos.save(request.files['img'], name=new_name)
