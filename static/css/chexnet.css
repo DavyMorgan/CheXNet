@@ -248,7 +248,9 @@ header {
     text-align: center;
 }
 .main section.page2 {
-    background: #555557 url(/static/img/back-phone.png) no-repeat center -150px ;
+    /*background: #555557 url(/static/img/back-phone.png) no-repeat center -150px ;*/
+    background: url(/static/img/medical3.jpg) no-repeat center;
+    background-size: 100% 100%;
 }
 .main section.page2 > img {
     position: absolute;
