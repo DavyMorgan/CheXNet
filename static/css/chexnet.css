@@ -216,15 +216,14 @@ header {
 .main section  {
     overflow: hidden;
 }
-
 .main section > img {
     position: absolute;
     max-width: 100%;
     z-index: 1;
 }
-
 .main section.page1 {
     background: url(/static/img/medical.jpg) no-repeat center;
+    background-size: 100% 100%;
 }
 .main section.page1 h1 {
     text-align: left;
