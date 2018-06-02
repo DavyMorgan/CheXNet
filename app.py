@@ -9,7 +9,7 @@ import cv2
 import numpy as np
 import config
 from werkzeug.utils import secure_filename
-from model2 import Pytorch_model
+from model3 import Pytorch_model
 import os
 import psutil
 
