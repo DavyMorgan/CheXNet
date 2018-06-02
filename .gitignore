@@ -4,3 +4,4 @@ __pycache__/
 uploads/
 *.pkl
 static/img/
+*.pth.tar
