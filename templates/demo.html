@@ -12,40 +12,40 @@
 	<link rel="canonical" href="http://www.chexnet.com/index.html" />
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Pacifico:400' rel='stylesheet' type='text/css'>
-  <script type="text/javascript" src="{{ url_for('static',filename='js/jquery.js') }}"></script>
-  <script type="text/javascript" src="{{ url_for('static',filename='js/jquery.onepage-scroll.js') }}"></script>
-  <link href='/static/css/onepage-scroll.css' rel='stylesheet' type='text/css'>
-  <script src="{{ url_for('static',filename='js/vue.js') }}"></script>
-  <link rel="stylesheet" href="/static/css/bootstrap.css">
-  <link rel="stylesheet" href="/static/css/chexnet.css">
-  <script src="/static/js/bootstrap.js"></script>
-  <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <script type=text/javascript>
-    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-  </script>
-  <script type=text/javascript>
-    function ajaxForm(){
-        var formData = new FormData(document.getElementById("form1"));//表单id
-        $.ajax({
-            type: 'POST',
-            url: $SCRIPT_ROOT + '/demo',
-            data: formData,
-            contentType:false,
-            processData:false,
-            dataType: 'json',//希望服务器返回json格式的数据
-            success: function (data) {
-                if (data.result!=null) {
-                    result_1.predictions = data.result.predictions;
-                    result_1.img_path = data.img_path;
+    <script type="text/javascript" src="{{ url_for('static',filename='js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/jquery.onepage-scroll.js') }}"></script>
+    <link href='/static/css/onepage-scroll.css' rel='stylesheet' type='text/css'>
+    <script src="{{ url_for('static',filename='js/vue.js') }}"></script>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/chexnet.css">
+    <script src="/static/js/bootstrap.js"></script>
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <script type=text/javascript>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+    <script type=text/javascript>
+        function ajaxForm(){
+            var formData = new FormData(document.getElementById("form1"));//表单id
+            $.ajax({
+                type: 'POST',
+                url: $SCRIPT_ROOT + '/demo',
+                data: formData,
+                contentType:false,
+                processData:false,
+                dataType: 'json',//希望服务器返回json格式的数据
+                success: function (data) {
+                    if (data.result!=null) {
+                        result_1.predictions = data.result.predictions;
+                        result_1.img_path = data.img_path;
+                    }
+                    <!--$("send_img").src=data.img_path-->
+                },
+                error: function () {
+                    alert("异常！");
                 }
-                <!--$("send_img").src=data.img_path-->
-            },
-            error: function () {
-                alert("异常！");
-            }
-        });
-    }
-  </script>
+            });
+        }
+    </script>
 	<script>
 	  $(document).ready(function(){
       $(".main").onepage_scroll({
@@ -72,7 +72,7 @@
   	    </div>
       </section>
 	    
-	    <section class="page2">
+      <section class="page2">
 	      <div class="page_container">
           <h1>Easy-to-use user interface</h1>
           <h2>All you need is upload the X-ray, then diagnose it!</h2>

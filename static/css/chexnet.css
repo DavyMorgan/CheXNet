@@ -391,3 +391,7 @@ body.disabled-onepage-scroll .main section.page4 .page_container {
     -ms-filter: 'alpha(opacity=0)';
     height: 100%;
 }
+
+#send_img{
+    margin-top: 20px;
+}
