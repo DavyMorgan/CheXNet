@@ -37,10 +37,10 @@ class Pytorch_model:
             self.use_gpu = False
 
         net = ResNet18(14, False)
-        modelCheckpoint = torch.load(model_path)
+        modelCheckpoint = torch.load(model_path, map_location=lambda storage, loc: storage)
 
         #if not self.use_gpu:
-        net.load_state_dict(modelCheckpoint['state_dict'], map_location=lambda storage, loc: storage)
+        net.load_state_dict(modelCheckpoint['state_dict'])
         self.net1 = nn.Sequential(*list(net.resnet18.children())[:-1])  
         self.net2 = nn.Sequential(list(net.resnet18.children())[-1])
         self.net3 = list(net.children())[-1]
