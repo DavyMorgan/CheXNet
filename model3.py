@@ -155,6 +155,7 @@ class Pytorch_model:
             result = zip(index, prob)
 
         result = [(index, prob) for (index, prob) in result if prob>=0.1]
+        result = sorted(result, key=lambda x : x[1], reverse=True)
         return result, os.path.split(heatmap_path)[1]
 
 
