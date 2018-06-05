@@ -109,8 +109,10 @@ class Pytorch_model:
         #output = output.resize(1,14,1,1)
         #print(realo)
 
-        index = [ 'Atelectasis', 'Cardiomegaly', 'Effusion', 'Infiltration', 'Mass', 'Nodule', 'Pneumonia',
-                'Pneumothorax', 'Consolidation', 'Edema', 'Emphysema', 'Fibrosis', 'Pleural_Thickening', 'Hernia']
+        #index = [ 'Atelectasis', 'Cardiomegaly', 'Effusion', 'Infiltration', 'Mass', 'Nodule', 'Pneumonia',
+        #        'Pneumothorax', 'Consolidation', 'Edema', 'Emphysema', 'Fibrosis', 'Pleural_Thickening', 'Hernia']
+        index = [ '0Atelectasis', '1Cardiomegaly', '2Effusion', '3Infiltration', '4Mass', '5Nodule', '6Pneumonia',
+                '7Pneumothorax', '8Consolidation', '9Edema', '10Emphysema', '11Fibrosis', '12Pleural_Thickening', '13Hernia']
         prob = realo.numpy().tolist()
         print(prob)
         #---- Generate heatmap
@@ -152,7 +154,7 @@ class Pytorch_model:
         else:
             result = zip(index, prob)
 
-        result = [(index, prob) for (index, prob) in result if prob>=0.5]
+        result = [(index, prob) for (index, prob) in result if prob>=0.1]
         return result, os.path.split(heatmap_path)[1]
 
 
