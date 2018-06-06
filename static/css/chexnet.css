@@ -285,12 +285,13 @@ header {
 .main section.page3{
     background:#e9ae55;
 }*/
+
 .main section.page3 .page_container{
-    top: 5%;
+    top: 0;
 }
 .main section.page3 h1{
     color: black;
-    padding: 75px 50px 25px 50px;
+    padding: 25px 50px 25px 50px;
 }
 #form1{
     position: relative;
@@ -302,7 +303,10 @@ header {
 }
 #generatedTable{
     position: relative;
-    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 /*
 .main section.page4 {

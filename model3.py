@@ -127,12 +127,13 @@ class Pytorch_model:
         npHeatmap = heatmap.cpu().data.numpy()
 
         imgOriginal = cv2.imread(image_path, 1)
-        img = cv2.resize(imgOriginal, (224, 224))
+        img_size = 336
+        img = cv2.resize(imgOriginal, (img_size, img_size))
         
         #cam = npHeatmap / np.max(npHeatmap)
         #cam = cv2.resize(cam, (self.transCrop, self.transCrop))
         cam = npHeatmap
-        cam = cv2.resize(cam, (224, 224), cv2.INTER_CUBIC)
+        cam = cv2.resize(cam, (img_size, img_size), cv2.INTER_CUBIC)
         cam = cam / np.max(cam)
         np.where(cam > 0.5, cam*cam-cam/2+0.5, cam)
         heatmap = cv2.applyColorMap(np.uint8(255*cam), cv2.COLORMAP_JET)
