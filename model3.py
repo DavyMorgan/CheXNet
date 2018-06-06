@@ -48,7 +48,15 @@ class Pytorch_model:
         self.net1.eval()
         self.net2.eval()
         self.net3.eval()
-        self.weights = list(self.net1.parameters())[-2]
+        self.weight = list(net.parameters())[-2]
+        self.weight = torch.clamp(self.weight,min=0)
+        #print(self.weights.shape)
+        self.ww1 = list(self.net1.parameters())[-1]
+        self.ww3 = list(self.net1.parameters())[-3]
+        self.ww4 = list(self.net1.parameters())[-4]
+        self.ww5 = list(self.net1.parameters())[-5]
+        self.ww6 = list(self.net1.parameters())[-6]
+        #print(self.net1)
 
         if classes_txt is not None:
             with open(classes_txt, 'r') as f:
@@ -113,15 +121,23 @@ class Pytorch_model:
         #        'Pneumothorax', 'Consolidation', 'Edema', 'Emphysema', 'Fibrosis', 'Pleural_Thickening', 'Hernia']
         index = [ '0Atelectasis', '1Cardiomegaly', '2Effusion', '3Infiltration', '4Mass', '5Nodule', '6Pneumonia',
                 '7Pneumothorax', '8Consolidation', '9Edema', '10Emphysema', '11Fibrosis', '12Pleural_Thickening', '13Hernia']
+        
         prob = realo.numpy().tolist()
         print(prob)
+        print(self.weight.shape)
+        a = realo.reshape((1,14))
+        b = self.weight
+        weights = torch.mm(a, b)
+        weights = weights.reshape(512)
+        print(weights.shape)
+
         #---- Generate heatmap
         #print(len(self.weights))
         heatmap = None
-        for i in range (0, len(self.weights)):
+        for i in range (0, len(weights)):
             map = output[0,i,:,:]
-            if i == 0: heatmap = self.weights[i] * map
-            else: heatmap += self.weights[i] * map
+            if i == 0: heatmap = weights[i] * map
+            else: heatmap += weights[i] * map
         
         #---- Blend original and heatmap 
         npHeatmap = heatmap.cpu().data.numpy()
