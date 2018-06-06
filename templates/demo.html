@@ -89,9 +89,9 @@
             </span>
             <button class="btn btn-success fileinput-button" type="button" onclick="ajaxForm()">Diagnose</button>
           </form>
-          <div id="app">
-            <img id="send_img" :src="img_path" v-show="change_status"/>
-            <table id="generatedTable"  v-show="has_illness">
+          <div id="app" v-show="change_status">
+            <img id="send_img" :src="img_path" />
+            <table id="generatedTable"  >
                 <thead>
                     <tr>
                         <th>rank</th>
@@ -138,11 +138,6 @@
                       console.log(this.predictions);
                       console.log(this.predictions != null);
                       return this.predictions != null
-                  },
-                  has_illness: function () {
-                      console.log(this.predictions);
-                      console.log(len(this.predictions) != 0);
-                      return len(this.predictions) != 0
                   }
               }
           })
