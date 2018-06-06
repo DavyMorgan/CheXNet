@@ -308,6 +308,10 @@ header {
     margin-left: auto;
     margin-right: auto;
 }
+.main section.page3 h2{
+    color: black;
+    padding: 25px 50px 25px 50px;
+}
 /*
 .main section.page4 {
     background:url(/static/img/auther.jpg) no-repeat 156px -150px ;
