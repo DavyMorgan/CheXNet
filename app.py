@@ -19,7 +19,7 @@ photos = UploadSet('PHOTO')
 configure_uploads(app, photos)
 
 
-@app.route('/')
+@app.route('/chexnet')
 def index():
     return render_template('demo.html')
 
