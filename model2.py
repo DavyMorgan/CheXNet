@@ -39,7 +39,7 @@ class Pytorch_model:
             self.use_gpu = False
 
         net = ResNet18(14, False)
-        modelCheckpoint = torch.load(model_path)
+        modelCheckpoint = torch.load(model_path, map_location=lambda storage, loc: storage)
 
         if not self.use_gpu:
             net.load_state_dict(modelCheckpoint['state_dict'])
