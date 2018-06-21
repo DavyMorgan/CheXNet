@@ -7,7 +7,7 @@
 	<meta name="description" content="Website for CheXNet as a course project for Media and Cognition in Dept. of EE THU" />
 	<link rel="image_src" href="/images/notify_better_image.png" />
 
-	<link rel="shortcut icon" id="favicon" href="favicon.png"> 
+	<link rel="shortcut icon" id="favicon" href="/static/img/favicon.ico">
 	<meta name="author" content="Davy">
 	<link rel="canonical" href="http://www.chexnet.com/index.html" />
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
@@ -81,7 +81,7 @@
 
       <section class="page3">
 	      <div class="page_container">
-          <h1>Have a try!</h1>
+          <h1>Have a try !</h1>
           <form id="form1" onsubmit="return false" enctype="multipart/form-data">
             <span class="btn btn-success fileinput-button">
               <span>Upload</span>
@@ -89,9 +89,9 @@
             </span>
             <button class="btn btn-success fileinput-button" type="button" onclick="ajaxForm()">Diagnose</button>
           </form>
-          <div id="app" v-show="change_status">
+          <div class="show" id="app" v-show="change_status">
             <img id="send_img" :src="img_path" />
-            <table id="generatedTable"  >
+            <table class="show" id="generatedTable"  v-show="ill">
                 <thead>
                     <tr>
                         <th>rank</th>
@@ -101,12 +101,13 @@
                 </thead>
                 <tbody >
                     <tr v-for="(item,index) in predictions">
-                        <td >[[ index ]]</td>
+                        <td >[[ index + 1 ]]</td>
                         <td >[[ item.label ]]</td>
                         <td>[[ item.probability ]]</td>
                     </tr>
                  </tbody>
              </table>
+             <h2 class="show" id="healthy-flag" v-show="healthy">You are healthy !</h2>
           </div>
 	      </div>
       </section>
@@ -127,7 +128,8 @@
       </section>
       <script>
           var result_1 = new Vue({
-              el:"#app",
+              //el:"#app",
+              el:".show",
               data:{
                   predictions:null,
                   img_path:null,
@@ -136,14 +138,29 @@
               computed:{
                   change_status: function () {
                       console.log(this.predictions);
+                      if (this.predictions){
+                          console.log(this.predictions.length);
+                      }
                       console.log(this.predictions != null);
                       return this.predictions != null
-                  }
+                  },
+                  ill: function() {
+                      if (this.predictions){
+                          return this.predictions.length > 0
+                      }
+                  },
+                  healthy: function() {
+                      if (this.predictions){
+                          return this.predictions.length == 0
+                      }
+                  },
               }
           })
       </script>
     </div>
+    <!--
     <a class="back" href="http://www.thepetedesign.com/#design">Highly appreciate Pete R.'s great work </a>
+    -->
   </div>
 </body>
 </html>

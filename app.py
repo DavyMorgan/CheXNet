@@ -19,7 +19,7 @@ photos = UploadSet('PHOTO')
 configure_uploads(app, photos)
 
 
-@app.route('/')
+@app.route('/chexnet')
 def index():
     return render_template('demo.html')
 
@@ -87,5 +87,5 @@ if __name__ == '__main__':
     gpu_id = None
     model = Pytorch_model(model_path=model_path, img_shape=[
         224, 224], img_channel=3, gpu_id=gpu_id)
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=80, threaded=True)
     print(psutil.Process(os.getpid()).memory_info().rss)

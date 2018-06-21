@@ -48,7 +48,15 @@ class Pytorch_model:
         self.net1.eval()
         self.net2.eval()
         self.net3.eval()
-        self.weights = list(self.net1.parameters())[-2]
+        self.weight = list(net.parameters())[-2]
+        self.weight = torch.clamp(self.weight,min=0)
+        #print(self.weights.shape)
+        self.ww1 = list(self.net1.parameters())[-1]
+        self.ww3 = list(self.net1.parameters())[-3]
+        self.ww4 = list(self.net1.parameters())[-4]
+        self.ww5 = list(self.net1.parameters())[-5]
+        self.ww6 = list(self.net1.parameters())[-6]
+        #print(self.net1)
 
         if classes_txt is not None:
             with open(classes_txt, 'r') as f:
@@ -113,27 +121,40 @@ class Pytorch_model:
         #        'Pneumothorax', 'Consolidation', 'Edema', 'Emphysema', 'Fibrosis', 'Pleural_Thickening', 'Hernia']
         index = [ '0Atelectasis', '1Cardiomegaly', '2Effusion', '3Infiltration', '4Mass', '5Nodule', '6Pneumonia',
                 '7Pneumothorax', '8Consolidation', '9Edema', '10Emphysema', '11Fibrosis', '12Pleural_Thickening', '13Hernia']
+        
         prob = realo.numpy().tolist()
         print(prob)
+        print(self.weight.shape)
+        a = realo.reshape((1,14))
+        b = self.weight
+        weights = torch.mm(a, b)
+        weights = weights.reshape(512)
+        print(weights.shape)
+
         #---- Generate heatmap
         #print(len(self.weights))
         heatmap = None
-        for i in range (0, len(self.weights)):
+        for i in range (0, len(weights)):
             map = output[0,i,:,:]
-            if i == 0: heatmap = self.weights[i] * map
-            else: heatmap += self.weights[i] * map
+            if i == 0: heatmap = weights[i] * map
+            else: heatmap += weights[i] * map
         
         #---- Blend original and heatmap 
         npHeatmap = heatmap.cpu().data.numpy()
 
         imgOriginal = cv2.imread(image_path, 1)
-        img = cv2.resize(imgOriginal, (self.transCrop, self.transCrop))
+        img_size = 336
+        img = cv2.resize(imgOriginal, (img_size, img_size))
         
-        cam = npHeatmap / np.max(npHeatmap)
-        cam = cv2.resize(cam, (self.transCrop, self.transCrop))
+        #cam = npHeatmap / np.max(npHeatmap)
+        #cam = cv2.resize(cam, (self.transCrop, self.transCrop))
+        cam = npHeatmap
+        cam = cv2.resize(cam, (img_size, img_size), cv2.INTER_CUBIC)
+        cam = cam / np.max(cam)
+        np.where(cam > 0.5, cam*cam-cam/2+0.5, cam)
         heatmap = cv2.applyColorMap(np.uint8(255*cam), cv2.COLORMAP_JET)
               
-        img = heatmap * 0.5 + img
+        img = heatmap * 0.3 + img * 0.6
             
         cv2.imwrite(image_path+'.heat.jpg', img)
         heatmap_path = image_path+'.heat.jpg'
